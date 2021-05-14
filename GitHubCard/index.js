@@ -1,8 +1,20 @@
+import axios from 'axios';
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+axios
+  .get('https://api.github.com/users/LunaTauer')
+  .then(res =>{
+    const user = res.data
+    document.querySelector('.cards').append(gitMaker(user));
+    console.log(res.data);
+  })
+  .catch(err =>{
+    console.log(err);
+  })
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -28,7 +40,12 @@
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+  'tetondan',
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell']
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -49,6 +66,48 @@ const followersArray = [];
       </div>
     </div>
 */
+function gitMaker (data){
+const card = document.createElement('div')
+const image = document.createElement('img')
+const cardinfo = document.createElement('div')
+const name = document.createElement('h3')
+const username = document.createElement('p')
+const Location = document.createElement('p')
+const Profile = document.createElement('p')
+const address = document.createElement('a')
+const Followers = documnent.createElement('p')
+const Following = document.createElement('p')
+const Bio = document.createElement('P')
+
+card.classList.add('card')
+image.src = data.avatar_url
+cardinfo.classList.add('card-info')
+name.classList.add('name')
+username.classList.add('username')
+
+card.appendChild(image)
+card.appendChild(cardinfo)
+cardinfo.appendChild(name)
+cardinfo.appendChild(username)
+cardinfo.appendChild(Location)
+cardinfo.appendChild(Profile)
+cardinfo.appendChild(address)
+cardinfo.appendChild(Followers)
+cardinfo.appendChild(Following)
+cardinfo.appendChild(Bio)
+
+name.textContent = data.name
+username.textcontent = data.usernamne
+location.textcontent = `Location: ${data.Location}`
+Followers.textcontent = `Followers: ${data.Followers}`
+Following.textcontent = `Following: ${data.Following}`
+Bio.textcontent = `Bio: ${data.Bio}`
+
+return card
+}
+
+
+
 
 /*
   List of LS Instructors Github username's:
